@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<head>
+<title>Calculator</title>
+</head>
+<body>
+<form method="GET" action=NULL>
+        <p>
+                <label for= "firstinput" >First Number</label>
+                <input type="text" name="x" id="firstinput" />
+                <label for="secondinput">Second Number</label>
+                <input type="text" name="y" id="secondinput" />
+        </p>
+        <p>
+                <input type="radio" name="operation" value="+" id="+"/> Add <br/>
+                <input type="radio" name="operation" value="-" id="-"/> Subtract <br/>
+                <input type="radio" name="operation" value="*" id="*"/> Multiply <br/>
+                <input type="radio" name="operation" value="/" id="/"/> Divide <br/>
+        </p>
+</form>
+<div id = "equals">
+</div>
+<script type="text/javascript">
+
+document.getElementById("+").addEventListener("click", doMath, false);
+document.getElementById("-").addEventListener("click", doMath, false);
+document.getElementById("*").addEventListener("click", doMath, false);
+document.getElementById("/").addEventListener("click", doMath, false);
+document.getElementsByName("x")[0].addEventListener("change", doMath, false);
+document.getElementsByName("y")[0].addEventListener("change", doMath, false);
+
+
+function doMath(){
+	var x = document.getElementsByName("x")[0].value;
+	var y = document.getElementsByName("y")[0].value;
+	var buttons = document.getElementsByName("operation");
+	var current_operation = "";
+	var equals = 0;
+	for(var i = 0; i<buttons.length; i++){
+		if(buttons[i].checked){
+			current_operation = buttons[i].value;
+			if(current_operation == "+"){
+				equals = add(x, y);
+			}
+			else if(current_operation == "-"){
+				equals = minus(x, y);
+			}
+			else if(current_operation == "*"){
+				equals = mult(x, y);
+			}
+			else if(current_operation == "/"){
+				equals = div(x, y);
+			}
+			document.getElementById("equals").innerHTML = equals;
+			break;
+		}
+	}
+}
+
+function add(x, y){
+	return parseInt(x) + parseInt(y);
+}
+
+function minus(x, y){
+	return x - y;
+}
+
+function mult(x, y){
+	return x * y;
+}
+
+function div(x, y){
+	if(y == 0)
+		return "You cannot divide a number by 0. Please change Second Number to something else";
+	else
+		return x / y;
+}
+
+</script>
+</body>
+</html>
